@@ -1,7 +1,7 @@
 project( opencv_test CXX )
 cmake_minimum_required( VERSION 3.0 )
 
-set( OpenCV_DIR "J:\\OpenCV\\BUILD\\install" )
+set( OpenCV_DIR "Deps_VS2017" CACHE PATH "OpenCV libraries"  )
 
 FIND_PACKAGE(OpenCV REQUIRED core highgui imgcodecs)
 
@@ -14,4 +14,7 @@ TARGET_LINK_LIBRARIES( webcam_test ${OpenCV_LIBS} )
 ADD_EXECUTABLE( screen_test screen_test.cpp CaptureWindow.cpp )
 TARGET_LINK_LIBRARIES( screen_test ${OpenCV_LIBS} )
 
-INSTALL( TARGETS opencv_test webcam_test screen_test RUNTIME DESTINATION bin )
+ADD_EXECUTABLE( qr_show qr_show.cpp QRProcessor.cpp )
+TARGET_LINK_LIBRARIES( qr_show ${OpenCV_LIBS} )
+
+INSTALL( TARGETS opencv_test webcam_test screen_test qr_show RUNTIME DESTINATION bin )
